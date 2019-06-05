@@ -1,7 +1,7 @@
 ﻿import random
 from deap import base,creator,tools
 from benchmark import McCormick
-1
+
 def feasible(individual):
     if -1.5 < individual[0] < 4 and -3 < individual[1] < 4 :
         return True
