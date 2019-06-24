@@ -1,4 +1,4 @@
-import numpy as np
+﻿import numpy as np
 import random
 
 #評価関数:  
@@ -51,5 +51,14 @@ def main():
             if score < personal_best_scores[n]:
                 personal_best_scores[n] = score
                 personal_best_positions[n] = {"x":new_x,"y":new_y}
+	    #グローバルベストの更新を行う
+         best_particle = np.argmin(personal_best_scores)
+         global_best_position = personal_best_positions[best_particle]
+    #最適解
+    print(global_best_position)
+    print(min(personal_best_scores))
+
+if __name__== '__main__':
+    main()
 
 
