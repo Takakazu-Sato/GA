@@ -1,9 +1,10 @@
 ﻿import numpy as np
 import random
+from math import sin, cos, pi, exp, e, sqrt
 
 #評価関数:  
 def criterion(x, y):
-    z = x*x+y*y
+    z = sin(x+y)+((x-y)**2)-1.5*x+2.5*y+1
     return z
 
 #粒子の位置の更新を行う関数
@@ -23,6 +24,7 @@ def update_velocity(x,y,vx,vy,p,g,w=0.5,ro_max=0.14):
     return new_vx,new_vy
 
 def main():
+    random.seed(1000)
     N = 100 #粒子の数
     x_min,x_max = -5,5
     y_min,y_max = -5,5
@@ -31,7 +33,7 @@ def main():
     vs = [{"x":0.0,"y":0.0} for i in range(N)]
     personal_best_positions = list(ps)
     personal_best_scores = [criterion(p["x"],p["y"]) for p in ps]
-    best_particle = np.aargmin(personal_vest_scores)
+    best_particle = np.argmin(personal_best_scores)
     global_best_position = personal_best_positions[best_particle]
 
     T=30 #制限時間（ループの回数)
@@ -51,14 +53,13 @@ def main():
             if score < personal_best_scores[n]:
                 personal_best_scores[n] = score
                 personal_best_positions[n] = {"x":new_x,"y":new_y}
-	    #グローバルベストの更新を行う
-         best_particle = np.argmin(personal_best_scores)
-         global_best_position = personal_best_positions[best_particle]
-    #最適解
+            #グローバルベストの更新を行う
+        best_particle = np.argmin(personal_best_scores)
+        global_best_position = personal_best_positions[best_particle]
+     #最適解
     print(global_best_position)
     print(min(personal_best_scores))
 
 if __name__== '__main__':
     main()
-
 
